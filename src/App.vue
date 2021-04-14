@@ -31,6 +31,7 @@
         <div class="box-button" v-if="quiz">
           <button @click=" SkipQuestion" :style="!next?'background-color:rgba(10,120,202)':''">Skip</button>
           <button @click="nextQuestion" :style="next?'background-color:rgba(10,128,202)':''">Next</button>
+          <button @click.prevent="kakao">카카오로그인</button>
         </div>
       </div>
     </div>
@@ -39,7 +40,7 @@
 
 <script>
 
-
+import axios from 'axios';
 export default {
   name: 'App',
   data() {
@@ -102,6 +103,13 @@ export default {
     }
   },
   methods:{
+    kakao(){
+      try {
+        axios.get('http://localhost:5000/auth/google')
+      } catch (error) {
+        console.log(error)
+      }
+    },
     seletResponse(item){
       this.lastCheck();
 
